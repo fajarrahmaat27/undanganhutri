@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MailOpen, Quote, Clock, Heart, Users, Music2, HeartHandshake, Image as ImageIcon, PlayCircle } from 'lucide-react';
+import { MailOpen, Quote, Clock, Music2, HeartHandshake } from 'lucide-react';
 import heroImg from './assets/hero.png';
 import iskImg from './assets/isk.png';
 import pangdamImg from './assets/pangdam.png';
 import tuankuTambusaiImg from './assets/tuankutambusai.png';
 import siakImg from './assets/siak.png';
+import bupatiSiakImg from './assets/bupatisiak.png';
+import anakPalestinaImg from './assets/anakpalestina.jpeg';
+import korbanNttImg from './assets/korbanntt.jpeg';
+import anakPalestinaGaleriImg from './assets/anakpalestinagaleri.jpeg';
+import korbanNttGaleriImg from './assets/korbannttgaleri.jpeg';
+import trankGaleriImg from './assets/trankgaleri.jpeg';
 
 const tailwindStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap');
@@ -219,67 +225,6 @@ const ShapeDivider = ({ topColor, bottomColor, isFlipped = false, trim = true })
   );
 };
 
-// ---- Figur manusia siluet yang lebih realistis, dipakai berulang ----
-const PersonFigure = ({ pose = 'stand', flip = false }) => {
-  const poses = {
-    stand: (
-      <>
-        <circle cx="0" cy="-38" r="7" />
-        <path d="M-6,-31 C-6,-31 -9,-10 -8,4 L-2,4 L0,-14 L2,4 L8,4 C9,-10 6,-31 6,-31 C6,-31 0,-34 0,-34 C0,-34 -6,-31 -6,-31 Z" />
-        <path d="M-8,4 L-10,26 L-4,26 L-1,6 Z" />
-        <path d="M8,4 L10,26 L4,26 L1,6 Z" />
-        <path d="M-6,-29 C-9,-27 -11,-18 -10,-10 L-7,-11 C-8,-18 -6,-25 -4,-28 Z" />
-        <path d="M6,-29 C9,-27 11,-18 10,-10 L7,-11 C8,-18 6,-25 4,-28 Z" />
-      </>
-    ),
-    flagBearer: (
-      <>
-        <circle cx="0" cy="-38" r="7" />
-        <path d="M-6,-31 C-6,-31 -9,-10 -8,4 L-2,4 L0,-14 L2,4 L8,4 C9,-10 6,-31 6,-31 C6,-31 0,-34 0,-34 C0,-34 -6,-31 -6,-31 Z" />
-        <path d="M-8,4 L-10,26 L-4,26 L-1,6 Z" />
-        <path d="M8,4 L10,26 L4,26 L1,6 Z" />
-        <path d="M4,-30 C8,-40 12,-55 14,-72 L11,-73 C8,-56 5,-42 1,-32 Z" />
-        <path d="M-6,-29 C-9,-27 -11,-18 -10,-10 L-7,-11 C-8,-18 -6,-25 -4,-28 Z" />
-        <line x1="14" y1="-72" x2="14" y2="10" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M14,-72 C24,-70 30,-66 40,-68 C36,-63 36,-58 40,-53 C30,-55 24,-51 14,-53 Z" />
-      </>
-    ),
-    salute: (
-      <>
-        <path d="M-7,-40 C-7,-46 7,-46 7,-40 L7,-33 L-7,-33 Z" />
-        <circle cx="0" cy="-32" r="6.5" />
-        <path d="M-6,-25 C-6,-25 -9,-6 -8,6 L-2,6 L0,-10 L2,6 L8,6 C9,-6 6,-25 6,-25 C6,-25 0,-28 0,-28 C0,-28 -6,-25 -6,-25 Z" />
-        <path d="M-8,6 L-10,26 L-4,26 L-1,8 Z" />
-        <path d="M8,6 L10,26 L4,26 L1,8 Z" />
-        <path d="M5,-24 C9,-27 10,-31 8,-34 L5,-32 C6,-30 5,-27 2,-25 Z" />
-        <path d="M-6,-23 C-9,-21 -11,-12 -10,-4 L-7,-5 C-8,-12 -6,-19 -4,-22 Z" />
-      </>
-    ),
-    holdHands: (
-      <>
-        <circle cx="0" cy="-38" r="7" />
-        <path d="M-6,-31 C-6,-31 -9,-10 -8,4 L-2,4 L0,-14 L2,4 L8,4 C9,-10 6,-31 6,-31 C6,-31 0,-34 0,-34 C0,-34 -6,-31 -6,-31 Z" />
-        <path d="M-8,4 L-10,26 L-4,26 L-1,6 Z" />
-        <path d="M8,4 L10,26 L4,26 L1,6 Z" />
-        <path d="M6,-29 C11,-27 15,-22 17,-16 L14,-14 C12,-20 9,-24 4,-27 Z" />
-        <path d="M-6,-29 C-9,-27 -11,-18 -10,-10 L-7,-11 C-8,-18 -6,-25 -4,-28 Z" />
-      </>
-    ),
-    chainHold: (
-      <>
-        <circle cx="0" cy="-38" r="7" />
-        <path d="M-6,-31 C-6,-31 -9,-10 -8,4 L-2,4 L0,-14 L2,4 L8,4 C9,-10 6,-31 6,-31 C6,-31 0,-34 0,-34 C0,-34 -6,-31 -6,-31 Z" />
-        <path d="M-8,4 L-10,26 L-4,26 L-1,6 Z" />
-        <path d="M8,4 L10,26 L4,26 L1,6 Z" />
-        <path d="M6,-29 C11,-27 15,-22 17,-16 L14,-14 C12,-20 9,-24 4,-27 Z" />
-        <path d="M-6,-29 C-11,-27 -15,-22 -17,-16 L-14,-14 C-12,-20 -9,-24 -4,-27 Z" />
-      </>
-    ),
-  };
-
-  return <g transform={flip ? 'scale(-1,1)' : undefined}>{poses[pose]}</g>;
-};
-
 // Ikon "equalizer" 3-batang — dipakai di tombol musik, meniru gaya referensi
 const SoundBars = ({ active = false, className = '' }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
@@ -296,19 +241,7 @@ const RankStar = ({ className = '' }) => (
   </svg>
 );
 
-// Rumah adat: bentuk disederhanakan agar jelas terbaca sebagai rumah panggung beratap pelana
-const RumahAdatShape = ({ x = 0, scale = 1 }) => (
-  <g transform={`translate(${x},0) scale(${scale})`}>
-    <path d="M-34,2 C-30,-9 -18,-11 -14,-21 C-9,-15 9,-15 14,-21 C18,-11 30,-9 34,2 Z" />
-    <rect x="-26" y="2" width="52" height="15" />
-    <rect x="-6" y="8" width="12" height="9" fill="#141C0D" opacity="0.55" />
-    <rect x="-22" y="17" width="4" height="9" />
-    <rect x="18" y="17" width="4" height="9" />
-    <rect x="-2" y="17" width="4" height="9" />
-  </g>
-);
-
-// Kumpulan Siluet SVG — versi lebih hidup & terperinci
+// Kumpulan Siluet SVG — hanya "Fighters" yang dipakai di Section Hero
 const Silhouettes = {
   Fighters: () => {
     const numRays = 15;
@@ -328,70 +261,6 @@ const Silhouettes = {
       </svg>
     );
   },
-  People: () => (
-    <svg viewBox="0 0 200 100" className="absolute bottom-10 left-0 w-full h-28 opacity-[0.09] text-[#33481F] pointer-events-none" fill="currentColor">
-      <line x1="6" y1="70" x2="194" y2="70" stroke="currentColor" strokeWidth="1.4" opacity="0.6" />
-      <g transform="translate(16,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(44,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(72,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(100,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(128,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(156,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-      <g transform="translate(184,90) scale(0.95)"><PersonFigure pose="chainHold" /></g>
-    </svg>
-  ),
-  Military: () => (
-    <>
-      <svg viewBox="0 0 200 60" className="absolute bottom-6 left-0 w-full h-24 opacity-[0.16] pointer-events-none" fill="currentColor">
-        <ellipse cx="14" cy="22" rx="20" ry="12" className="text-[#5c6b3a]" transform="rotate(-12 14 22)" />
-        <ellipse cx="52" cy="10" rx="16" ry="10" className="text-[#232f1a]" transform="rotate(8 52 10)" />
-        <ellipse cx="92" cy="28" rx="22" ry="13" className="text-[#6b5a34]" transform="rotate(-6 92 28)" />
-        <ellipse cx="134" cy="8" rx="18" ry="11" className="text-[#232f1a]" transform="rotate(14 134 8)" />
-        <ellipse cx="172" cy="24" rx="20" ry="12" className="text-[#5c6b3a]" transform="rotate(-10 172 24)" />
-      </svg>
-      <svg viewBox="0 0 200 50" className="absolute bottom-8 left-0 w-full h-20 opacity-[0.2] text-[#D4AF37] pointer-events-none" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-        {Array.from({ length: 13 }).map((_, i) => (
-          <path key={i} d={`M${i * 16 + 2},36 L${i * 16 + 10},22 L${i * 16 + 18},36`} />
-        ))}
-        <line x1="0" y1="42" x2="200" y2="42" opacity="0.55" />
-        <line x1="0" y1="46" x2="200" y2="46" opacity="0.3" />
-      </svg>
-    </>
-  ),
-  Skyline: () => {
-    const width = 400;
-    const lineY = 10;
-    const flagColors = ['#D4AF37', '#FDFBF7', '#33481F'];
-    const flagCount = 26;
-    const flagSpacing = width / flagCount;
-
-    return (
-      <svg viewBox={`0 0 ${width} 40`} className="absolute top-0 left-0 w-full h-12 pointer-events-none" fill="none">
-        <line x1="0" y1={lineY} x2={width} y2={lineY} stroke="#FDFBF7" strokeWidth="1.5" opacity="0.65" />
-        {Array.from({ length: flagCount }).map((_, i) => {
-          const x = (i + 0.5) * flagSpacing;
-          const y = lineY - 0.6;
-          const fill = flagColors[i % flagColors.length];
-          return (
-            <path
-              key={i}
-              d={`M${(x - 6.5).toFixed(1)},${y.toFixed(1)} L${(x + 6.5).toFixed(1)},${y.toFixed(1)} L${x.toFixed(1)},${(y + 15).toFixed(1)} Z`}
-              fill={fill}
-              opacity="0.8"
-            />
-          );
-        })}
-      </svg>
-    );
-  },
-  RumahAdat: () => (
-    <svg viewBox="0 0 200 48" className="absolute bottom-0 left-0 w-full h-auto text-[#D4AF37] opacity-[0.45] pointer-events-none" fill="currentColor">
-      <RumahAdatShape x={34} scale={0.8} />
-      <RumahAdatShape x={100} scale={1} />
-      <RumahAdatShape x={166} scale={0.8} />
-      <rect x="0" y="32" width="200" height="2" opacity="0.6" />
-    </svg>
-  ),
 };
 
 // Item timeline Storyboard — gaya "love story" tapi ditulis ulang dengan palet hijau-emas Kodam
@@ -425,8 +294,32 @@ const StoryboardItem = ({ year, title, description, icon: Icon, delay = 0, isLas
 };
 
 // Kartu galeri foto/video — placeholder bertema, siap diganti foto asli nantinya
-const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo }) => {
+const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) => {
   const [ref, visible] = useReveal(0.15);
+
+  // Video YouTube langsung bisa diputar di dalam galeri (embed), bukan cuma thumbnail
+  if (videoId) {
+    return (
+      <div
+        ref={ref}
+        style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
+        className={`reveal-scale ${visible ? 'visible' : ''} rounded-xl overflow-hidden border border-[#D4AF37]/30 shadow-lg bg-[#141C0D]`}
+      >
+        <div className="aspect-video w-full">
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            title={label}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <p className="text-center font-sans text-[10px] text-[#F5EFE6]/80 tracking-wide px-2 py-2.5">{label}</p>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={ref}
@@ -436,7 +329,7 @@ const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo }) => {
       {photo ? (
         <>
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 25%, rgba(212,175,55,0.25) 0%, transparent 70%)' }}></div>
-          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-contain object-bottom scale-110 origin-bottom" />
+          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#141C0D] to-transparent"></div>
           <p className="absolute bottom-2 left-0 right-0 text-center font-sans text-[10px] leading-tight text-[#F5EFE6] tracking-wide px-2 z-10">{label}</p>
         </>
@@ -638,9 +531,9 @@ export default function App() {
     setConfetti((prev) => prev.filter((p) => p.id !== id));
   }, []);
 
-  const [heroRef, heroVisible] = useReveal(0.15);
   const [storyTitleRef, storyTitleVisible] = useReveal(0.15);
   const [isKRef, isKVisible] = useReveal(0.15);
+  const [donasiRef, donasiVisible] = useReveal(0.15);
   const [galeriTitleRef, galeriTitleVisible] = useReveal(0.15);
   const [footerRef, footerVisible] = useReveal(0.15);
 
@@ -648,7 +541,12 @@ export default function App() {
 
   const galleryTiles = [
     { photo: pangdamImg, label: 'Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP' },
+    { photo: bupatiSiakImg, label: 'Dr. Afni Z, S.A.P., M.Si' },
     { photo: iskImg, label: 'Is K Violin' },
+    { photo: anakPalestinaGaleriImg, label: 'Anak-anak Palestina' },
+    { photo: korbanNttGaleriImg, label: 'Korban Gempa NTT' },
+    { photo: trankGaleriImg, label: 'Solidaritas Kemanusiaan' },
+    { videoId: 'VwJ2o73QeYU', label: 'Video Teaser' },
   ];
 
   return (
@@ -749,28 +647,84 @@ export default function App() {
                   hidden: { opacity: 0 },
                   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.8 } }
                 }}
-                className="relative z-10 flex flex-col items-center"
+                className="relative z-10 flex flex-col items-center w-full"
               >
-                {/* Judul poster (sama urutannya dengan Cover): Penyelenggara -> Present -> JUDUL -> rangka acara */}
-                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#D4AF37] text-[10px] font-bold tracking-[0.2em] uppercase mb-1">
-                  Kodam XIX/Tuanku Tambusai
-                </motion.p>
-                <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="inline-flex items-center gap-2 bg-[#D4AF37] text-[#33481F] font-sans font-bold text-[10px] uppercase tracking-widest pl-1.5 pr-4 py-1.5 rounded-full mb-6 mt-1 shadow-md">
-                  <span className="loreng-dot"></span>
-                  Present Is K Violin
+                {/* Foto Pangdam & Bupati Siak berdampingan */}
+                <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex items-start justify-center gap-6 mb-6 w-full px-4">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
+                      <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" />
+                    </div>
+                    <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Pangdam XIX/Tuanku Tambusai</p>
+                    <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP</p>
+                  </div>
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
+                      <img src={bupatiSiakImg} alt="Bupati Siak" className="w-full h-full object-cover object-top" />
+                    </div>
+                    <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Bupati Siak</p>
+                    <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Dr. Afni Z, S.A.P., M.Si</p>
+                  </div>
                 </motion.div>
 
-                <motion.h1 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-5xl mb-2 text-[#FDE047] drop-shadow-lg">Konser Amal</motion.h1>
-                <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-3xl font-bold tracking-wider mb-2 text-white">ANAK-ANAK PALESTINE</motion.h2>
-                <motion.div variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="merah-putih-rule w-14 rounded-full mt-3 mb-1"></motion.div>
-
-                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#D4AF37]/80 text-[9px] tracking-[0.15em] uppercase mt-3">
-                  Sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/TT
+                {/* Teks undangan */}
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#F5EFE6] text-[11px] tracking-[0.2em] uppercase mb-1">
+                  Mengundang
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#FDE047] text-lg font-bold tracking-wider uppercase text-center px-4">
+                  Forkopimda Kab. Siak
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-2xl text-[#D4AF37] my-0.5">
+                  &amp;
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#F5EFE6]/90 text-[11px] tracking-wide uppercase text-center max-w-[260px] leading-relaxed mb-6">
+                  Seluruh Elemen Masyarakat Siak - Riau - Indonesia
                 </motion.p>
 
-                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-sm text-[#F5EFE6] mt-4 leading-relaxed max-w-[280px]">
-                  Konser Amal untuk anak-anak Palestina ini lahir dari kepedulian yang menyatu — pertemuan CEO 'Muhammad', Irawan Adi Syah Putra bersama jajaran Kodam XIX/Tuanku Tambusai, hingga terwujud dalam sebuah panggung kemanusiaan bersama violinist cilik Is K.
+                {/* Foto Is K */}
+                <motion.div variants={{ hidden: { opacity: 0, scale: 0.7 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="mb-6">
+                  <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814] mx-auto">
+                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" />
+                  </div>
+                </motion.div>
+
+                {/* Rangka acara: Dirgahayu RI & HUT Kodam */}
+                <motion.div variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="merah-putih-rule w-14 rounded-full mb-3"></motion.div>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-white text-base font-bold tracking-widest uppercase text-center px-4">
+                  Sempena Dirgahayu RI ke-81
                 </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-xl text-[#D4AF37] my-0.5">
+                  &amp;
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-white text-base font-bold tracking-widest uppercase mb-6 text-center px-4">
+                  HUT ke-1 Kodam XIX/TT
+                </motion.p>
+
+                {/* Judul konser */}
+                <motion.h1 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-5xl mb-1 text-[#FDE047] drop-shadow-lg">Konser Amal</motion.h1>
+                <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-2xl font-bold tracking-widest mb-2 text-white uppercase">Is K Violin</motion.h2>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans italic text-[#D4AF37] text-xs tracking-[0.15em] uppercase mb-4">
+                  Dari Anak Untuk Anak
+                </motion.p>
+
+                <motion.div variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mb-4"></motion.div>
+
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-sm text-[#F5EFE6] leading-relaxed text-center max-w-[280px]">
+                  Bantuan Kemanusiaan
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-sm text-[#F5EFE6] leading-relaxed text-center max-w-[280px] mb-6">
+                  untuk Anak Palestina &amp; Korban Gempa NTT
+                </motion.p>
+
+                {/* Foto anak Palestina & korban NTT */}
+                <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-3 justify-center mb-2 w-full px-6">
+                  <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
+                    <img src={anakPalestinaImg} alt="Anak-anak Palestina" className="w-full h-32 object-cover" />
+                  </div>
+                  <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
+                    <img src={korbanNttImg} alt="Korban Gempa NTT" className="w-full h-32 object-cover" />
+                  </div>
+                </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex items-center gap-2.5 mt-8">
                   <CountdownBox value={timeLeft.days} label="Hari" />
@@ -809,7 +763,7 @@ export default function App() {
                   icon={Music2}
                   isLast={true}
                   delay={240}
-                  description="Di salah satu hotel di Pekanbaru, terjadi pertemuan tim 'Is K' dengan Kasdam XIX/TT, Bapak Brigjen TNI Rudi Hermawan, S.E., M.M. Tak disangka, beliau yang berjiwa seni sangat setuju Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini dilaksanakan sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/Tuanku Tambusai — namun beliau meminta waktu beberapa hari untuk berkonsultasi dengan Bapak Pangdam. Alhamdulillah, penantian itu berbuah manis: jiwa kemanusiaan yang tumbuh subur pada diri Pangdam Tuanku Tambusai, Bapak Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP, mengaminkan Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini. Beliau menyatakan konser tersebut ditaja langsung oleh Kodam XIX/TT — mengingat beliau sebelumnya pernah mengadakan konser amal di tahun 2025 — dan beliau setuju konser ini ditalentai oleh violinist cilik dari Kabupaten Siak, 'Is K'."
+                  description={`Di salah satu hotel di Pekanbaru,  terjadi pertemuan antara CEO Sun Event Organizer "Muhammad (Is K Management), iRawan Adi Syahputra" Tokoh Muda Dari Rengat. Tak disangka, beliau yang berjiwa seni sangat setuju Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini dilaksanakan sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/Tuanku Tambusai — namun beliau meminta waktu beberapa hari untuk berkonsultasi dengan Bapak Pangdam. Alhamdulillah, penantian itu berbuah manis: jiwa kemanusiaan yang tumbuh subur pada diri Pangdam Tuanku Tambusai, Bapak Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP, mengaminkan Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini. Beliau menyatakan konser tersebut ditaja langsung oleh Kodam XIX/TT — mengingat beliau sebelumnya pernah mengadakan konser amal di tahun 2025 — dan beliau setuju konser ini ditalentai oleh violinist cilik dari Kabupaten Siak, 'Is K'`}
                 />
               </div>
               <ShapeDivider topColor="#FDFBF7" bottomColor="#33481F" isFlipped={true} />
@@ -829,22 +783,43 @@ export default function App() {
                 <div className="bg-[#1C2814]/80 backdrop-blur-sm border border-[#D4AF37]/40 rounded-xl overflow-hidden text-center shadow-lg">
                   <div className="loreng-strip w-full"></div>
                   <div className="p-6">
-                    <Music2 className="w-9 h-9 text-[#D4AF37] mx-auto mb-3" />
-                    <p className="font-sans text-[#D4AF37]/70 text-[9px] tracking-[0.25em] uppercase mb-1">
-                      Kodam XIX/Tuanku Tambusai Present
+                    <Music2 className="w-9 h-9 text-[#D4AF37] mx-auto mb-4" />
+                    <h4 className="font-script text-4xl text-white mb-4">Saksikan</h4>
+                    <p className="font-sans text-xs text-gray-300 leading-relaxed text-left">
+                      Sebuah pertunjukan violin konser bertaraf internasional di tangan show director "Muhammad". Emosi yang menyentuh jiwa kita akan tersaji apik melalui dramatical konser musik klasik dan modern, dirajut bersama audio visual tragedi kemanusiaan, menjadi sebuah pertunjukan panggung nan epic.
                     </p>
-                    <h4 className="font-script text-4xl text-white mb-2">Is K Violin</h4>
-                    <p className="font-sans text-xs text-gray-300 mb-1">Violinist Cilik dari Kabupaten Siak</p>
-                    <p className="font-sans text-[11px] text-[#D4AF37] flex items-center justify-center gap-1 mb-4">
-                      <Clock className="w-3 h-3" /> 19:30 - 19:50 WIB
-                    </p>
-                    <div className="text-xs text-[#D4AF37] font-sans space-y-1">
-                      <p>Ditaja Langsung oleh Kodam XIX/Tuanku Tambusai</p>
-                    </div>
                   </div>
                 </div>
               </div>
               <ShapeDivider topColor="#22301A" bottomColor="#141C0D" />
+            </section>
+
+            {/* Section 3B: Donasi */}
+            <section className="relative bg-gradient-to-b from-[#141C0D] to-[#1C2814] pt-14 pb-24 px-6">
+              <div className="absolute inset-0 bg-batik-gold opacity-30"></div>
+
+              <div ref={donasiRef} className={`reveal ${donasiVisible ? 'visible' : ''} relative z-10 text-center`}>
+                <HeartHandshake className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
+                <h3 className="font-script text-4xl text-[#D4AF37] mb-6">Salurkan Donasi Terbaik Anda</h3>
+
+                <div className="bg-white rounded-xl p-5 shadow-md max-w-xs mx-auto text-left">
+                  <p className="font-sans text-[9px] text-gray-500 uppercase tracking-wide mb-1">Kerekening Baznas Provinsi Riau</p>
+                  <p className="font-serif text-xl font-bold text-[#33481F] tracking-wider mb-1">1011105992</p>
+                  <p className="font-sans text-xs text-gray-600">Badan Amil Zakat Prov. Riau</p>
+                </div>
+
+                <div className="mt-5 max-w-xs mx-auto bg-[#1C2814]/60 border border-[#D4AF37]/30 rounded-lg p-4 text-left">
+                  <p className="font-sans text-[10px] font-bold text-[#D4AF37] uppercase tracking-wide mb-2">Cara Transfer</p>
+                  <p className="font-sans text-xs text-gray-300 leading-relaxed">
+                    Tambahkan nominal "9" di akhir nominal transaksi sebagai kode program. Contoh: Rp 50.000 menjadi <span className="text-white font-semibold">Rp 50.009</span>.
+                  </p>
+                </div>
+
+                <p className="font-sans text-xs text-gray-300 italic mt-6 max-w-[260px] mx-auto leading-relaxed">
+                  Terima kasih, donasi Anda sangat menentukan nasib saudara kita.
+                </p>
+              </div>
+              <ShapeDivider topColor="#1C2814" bottomColor="#141C0D" />
             </section>
 
             {/* Section 4: Galeri Foto & Video */}
@@ -858,7 +833,7 @@ export default function App() {
 
               <div className="relative z-10 grid grid-cols-1 gap-6 max-w-xs mx-auto">
                 {galleryTiles.map((tile, idx) => (
-                  <GalleryTile key={idx} icon={tile.icon} label={tile.label} isVideo={tile.isVideo} photo={tile.photo} delay={idx * 90} />
+                  <GalleryTile key={idx} icon={tile.icon} label={tile.label} isVideo={tile.isVideo} photo={tile.photo} videoId={tile.videoId} delay={idx * 90} />
                 ))}
               </div>
             </section>
