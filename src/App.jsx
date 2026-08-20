@@ -111,7 +111,7 @@ const tailwindStyles = `
   .eq-bar.playing:nth-child(3) { animation-delay: -0.6s; }
 
   .scroll-container {
-      overflow-y: auto; overflow-x: hidden; height: 100vh; scrollbar-width: none;
+      overflow-y: auto; overflow-x: hidden; height: 100dvh; scrollbar-width: none;
   }
 
   .scroll-container::-webkit-scrollbar { display: none; }
@@ -553,7 +553,7 @@ export default function App() {
     <>
       <style>{tailwindStyles}</style>
 
-      <div className="flex justify-center w-full min-h-screen bg-gradient-to-br from-[#4B6130] via-[#33481F] to-[#141C0D] relative overflow-hidden">
+      <div className="flex justify-center w-full h-[100dvh] bg-gradient-to-br from-[#4B6130] via-[#33481F] to-[#141C0D] relative overflow-hidden">
         <div className="absolute inset-0 bg-batik-gold opacity-70"></div>
         <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 0%, rgba(212,175,55,0.12), transparent 60%)' }}></div>
         <div className="w-full max-w-md bg-white relative shadow-[0_0_60px_rgba(0,0,0,0.7)] overflow-hidden">
@@ -839,7 +839,7 @@ export default function App() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#24331a] pt-16 pb-12 px-6 text-center relative overflow-hidden">
+            <footer className="bg-[#24331a] pt-16 pb-32 px-6 text-center relative overflow-hidden">
               <div ref={footerRef} className={`reveal-scale ${footerVisible ? 'visible' : ''} relative z-10`}>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <div className="w-12 h-[1px] bg-[#D4AF37]/40"></div>
