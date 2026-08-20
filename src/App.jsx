@@ -406,57 +406,42 @@ export default function App() {
   const [isPlayerReady, setIsPlayerReady] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-
-    const initPlayer = () => {
-      if (cancelled || !ytWrapperRef.current || ytPlayerRef.current) return;
-
-      // Buat target mentah di luar kendali React
-      const target = document.createElement('div');
-      ytWrapperRef.current.appendChild(target);
-
-      ytPlayerRef.current = new window.YT.Player(target, {
-        videoId: YT_VIDEO_ID,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          disablekb: 1,
-          loop: 1,
-          playlist: YT_VIDEO_ID,
-        },
-        events: {
-          onReady: () => setIsPlayerReady(true),
-        },
-      });
-    };
-
-    const loadYT = () => {
-      if (cancelled) return;
-      if (window.YT && window.YT.Player) {
-        initPlayer();
-      } else {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.body.appendChild(tag);
-        const previousReady = window.onYouTubeIframeAPIReady;
-        window.onYouTubeIframeAPIReady = () => {
-          if (previousReady) previousReady();
-          initPlayer();
-        };
-      }
-    };
-
-    // Defer YouTube loading to massively improve initial page load (LCP & TBT)
-    const timerId = setTimeout(loadYT, 2500);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timerId);
-    };
+    // Only cleanup on unmount
+    return () => {};
   }, []);
+
+  const loadYT = () => {
+    if (window.YT && window.YT.Player) {
+      if (!ytPlayerRef.current && ytWrapperRef.current) {
+        const target = document.createElement('div');
+        ytWrapperRef.current.appendChild(target);
+        ytPlayerRef.current = new window.YT.Player(target, {
+          videoId: YT_VIDEO_ID,
+          playerVars: { autoplay: 1, controls: 0, disablekb: 1, loop: 1, playlist: YT_VIDEO_ID },
+          events: {
+            onReady: (e) => {
+              setIsPlayerReady(true);
+              e.target.playVideo();
+              setIsMusicPlaying(true);
+            },
+          },
+        });
+      }
+    } else {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      const previousReady = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (previousReady) previousReady();
+        loadYT();
+      };
+    }
+  };
 
   const handleOpenInvitation = () => {
     setIsOpened(true);
+    loadYT();
     if (ytPlayerRef.current && ytPlayerRef.current.playVideo) {
       ytPlayerRef.current.playVideo();
       setIsMusicPlaying(true);
@@ -592,15 +577,15 @@ export default function App() {
                 hidden: { opacity: 0 },
                 visible: {
                   opacity: 1,
-                  transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+                  transition: { staggerChildren: 0.15, delayChildren: 0.1 }
                 }
               }}
               className="z-10 relative flex flex-col items-center"
             >
-              <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-4 justify-center items-center mb-6">
+              <div className="flex gap-4 justify-center items-center mb-6">
                 <img src={tuankuTambusaiImg} alt="Kodam XIX/Tuanku Tambusai" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
                 <img src={siakImg} alt="Bupati Siak" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
-              </motion.div>
+              </div>
 
               <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#D4AF37] tracking-[0.2em] text-xs font-semibold mb-3 uppercase">
                 Undangan Terhormat
@@ -614,8 +599,9 @@ export default function App() {
                 Present Is K Violin
               </motion.p>
 
-              <motion.h1 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-white text-5xl mb-2 drop-shadow-md">Konser Amal</motion.h1>
-              <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#D4AF37] text-lg font-bold tracking-widest uppercase">
+              <h1 className="font-script text-white text-5xl mb-2 drop-shadow-md">Konser Amal</h1>
+              
+              <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#D4AF37] text-lg font-bold tracking-widest uppercase mt-2">
                 Anak-Anak Palestine & Korban Bencana Gempa NTT
               </motion.p>
 
