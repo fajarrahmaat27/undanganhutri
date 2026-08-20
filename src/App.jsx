@@ -14,8 +14,6 @@ import korbanNttGaleriImg from './assets/korbannttgaleri.jpeg';
 import trankGaleriImg from './assets/trankgaleri.jpeg';
 
 const tailwindStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap');
-
   .font-serif { font-family: 'Cinzel', serif; }
   .font-sans { font-family: 'Inter', sans-serif; }
   .font-script { font-family: 'Great Vibes', cursive; }
@@ -280,7 +278,7 @@ const StoryboardItem = ({ year, title, description, icon: Icon, delay = 0, isLas
       <h5 className="font-serif text-[#33481F] font-bold text-lg mb-2">{title}</h5>
       {photo && (
         <div className="portrait-stage w-full h-56 mb-3">
-          <img src={photo.src} alt={photo.alt} className="portrait-img" />
+          <img src={photo.src} alt={photo.alt} className="portrait-img" loading="lazy" />
           <div className="absolute bottom-2 left-0 right-0 text-center z-10">
             <p className="font-sans text-[9px] text-[#D4AF37] tracking-[0.1em] uppercase px-2">{photo.caption}</p>
           </div>
@@ -329,7 +327,7 @@ const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) 
       {photo ? (
         <>
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 25%, rgba(212,175,55,0.25) 0%, transparent 70%)' }}></div>
-          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#141C0D] to-transparent"></div>
           <p className="absolute bottom-2 left-0 right-0 text-center font-sans text-[10px] leading-tight text-[#F5EFE6] tracking-wide px-2 z-10">{label}</p>
         </>
@@ -593,8 +591,8 @@ export default function App() {
               className="z-10 relative flex flex-col items-center"
             >
               <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-4 justify-center items-center mb-6">
-                <img src={tuankuTambusaiImg} alt="Kodam XIX/Tuanku Tambusai" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
-                <img src={siakImg} alt="Bupati Siak" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+                <img src={tuankuTambusaiImg} alt="Kodam XIX/Tuanku Tambusai" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
+                <img src={siakImg} alt="Bupati Siak" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
               </motion.div>
 
               <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#D4AF37] tracking-[0.2em] text-xs font-semibold mb-3 uppercase">
@@ -653,14 +651,14 @@ export default function App() {
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex items-start justify-center gap-6 mb-6 w-full px-4">
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
-                      <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" />
+                      <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" loading="lazy" />
                     </div>
                     <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Pangdam XIX/Tuanku Tambusai</p>
                     <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP</p>
                   </div>
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
-                      <img src={bupatiSiakImg} alt="Bupati Siak" className="w-full h-full object-cover object-top" />
+                      <img src={bupatiSiakImg} alt="Bupati Siak" className="w-full h-full object-cover object-top" loading="lazy" />
                     </div>
                     <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Bupati Siak</p>
                     <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Dr. Afni Z, S.A.P., M.Si</p>
@@ -684,7 +682,7 @@ export default function App() {
                 {/* Foto Is K */}
                 <motion.div variants={{ hidden: { opacity: 0, scale: 0.7 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="mb-6">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814] mx-auto">
-                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" />
+                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" loading="lazy" />
                   </div>
                 </motion.div>
 
@@ -719,10 +717,10 @@ export default function App() {
                 {/* Foto anak Palestina & korban NTT */}
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-3 justify-center mb-2 w-full px-6">
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
-                    <img src={anakPalestinaImg} alt="Anak-anak Palestina" className="w-full h-32 object-cover" />
+                    <img src={anakPalestinaImg} alt="Anak-anak Palestina" className="w-full h-32 object-cover" loading="lazy" />
                   </div>
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
-                    <img src={korbanNttImg} alt="Korban Gempa NTT" className="w-full h-32 object-cover" />
+                    <img src={korbanNttImg} alt="Korban Gempa NTT" className="w-full h-32 object-cover" loading="lazy" />
                   </div>
                 </motion.div>
 
@@ -794,8 +792,24 @@ export default function App() {
               <ShapeDivider topColor="#22301A" bottomColor="#141C0D" />
             </section>
 
+            {/* Section 4: Galeri Foto & Video */}
+            <section className="relative bg-gradient-to-b from-[#141C0D] to-[#0f150a] pt-14 pb-20 px-6 overflow-hidden">
+              <div className="absolute inset-0 bg-batik-gold opacity-40"></div>
+
+              <div ref={galeriTitleRef} className={`reveal ${galeriTitleVisible ? 'visible' : ''} relative z-10 text-center mb-8`}>
+                <div className="loreng-strip w-16 rounded-full mx-auto mb-5 opacity-80"></div>
+                <h4 className="font-serif text-3xl font-bold text-[#FDE047] tracking-widest uppercase">GALERI</h4>
+              </div>
+
+              <div className="relative z-10 grid grid-cols-1 gap-6 max-w-xs mx-auto">
+                {galleryTiles.map((tile, idx) => (
+                  <GalleryTile key={idx} icon={tile.icon} label={tile.label} isVideo={tile.isVideo} photo={tile.photo} videoId={tile.videoId} delay={idx * 90} />
+                ))}
+              </div>
+            </section>
+
             {/* Section 3B: Donasi */}
-            <section className="relative bg-gradient-to-b from-[#141C0D] to-[#1C2814] pt-14 pb-24 px-6">
+            <section className="relative bg-gradient-to-b from-[#0f150a] to-[#1C2814] pt-14 pb-24 px-6">
               <div className="absolute inset-0 bg-batik-gold opacity-30"></div>
 
               <div ref={donasiRef} className={`reveal ${donasiVisible ? 'visible' : ''} relative z-10 text-center`}>
@@ -819,23 +833,7 @@ export default function App() {
                   Terima kasih, donasi Anda sangat menentukan nasib saudara kita.
                 </p>
               </div>
-              <ShapeDivider topColor="#1C2814" bottomColor="#141C0D" />
-            </section>
-
-            {/* Section 4: Galeri Foto & Video */}
-            <section className="relative bg-gradient-to-b from-[#141C0D] to-[#0f150a] pt-14 pb-20 px-6 overflow-hidden">
-              <div className="absolute inset-0 bg-batik-gold opacity-40"></div>
-
-              <div ref={galeriTitleRef} className={`reveal ${galeriTitleVisible ? 'visible' : ''} relative z-10 text-center mb-8`}>
-                <div className="loreng-strip w-16 rounded-full mx-auto mb-5 opacity-80"></div>
-                <h4 className="font-serif text-3xl font-bold text-[#FDE047] tracking-widest uppercase">GALERI</h4>
-              </div>
-
-              <div className="relative z-10 grid grid-cols-1 gap-6 max-w-xs mx-auto">
-                {galleryTiles.map((tile, idx) => (
-                  <GalleryTile key={idx} icon={tile.icon} label={tile.label} isVideo={tile.isVideo} photo={tile.photo} videoId={tile.videoId} delay={idx * 90} />
-                ))}
-              </div>
+              <ShapeDivider topColor="#1C2814" bottomColor="#24331a" />
             </section>
 
             {/* Footer */}
