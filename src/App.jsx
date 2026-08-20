@@ -4,8 +4,8 @@ import { MailOpen, Quote, Clock, Music2, HeartHandshake } from 'lucide-react';
 import heroImg from './assets/hero.png';
 import iskImg from './assets/isk.png';
 import pangdamImg from './assets/pangdam.png';
-import tuankuTambusaiImg from './assets/tuankutambusai.webp';
-import siakImg from './assets/siak.webp';
+import tuankuTambusaiImg from './assets/tuankutambusai.png';
+import siakImg from './assets/siak.png';
 import bupatiSiakImg from './assets/bupatisiak.png';
 import anakPalestinaImg from './assets/anakpalestina.jpeg';
 import korbanNttImg from './assets/korbanntt.jpeg';
@@ -26,11 +26,11 @@ const tailwindStyles = `
   }
 
   .bg-batik {
-      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2v-2.5h2v-4h-2v-2h2v-4h-2v-2h2v-4h-2V0h2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2.5H20zm0 0h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v-20.5zm-2 0H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v-20.5z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2v-2.5h2v-4h-2v-2h2v-4h-2v-2h2v-4h-2V0h2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2.5H20zm0 0h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v-20.5zm-2 0H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v-20.5z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
   .bg-batik-gold {
-      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2v-2.5h2v-4h-2v-2h2v-4h-2v-2h2v-4h-2V0h2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2.5H20zm0 0h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v-20.5zm-2 0H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v-20.5z' fill='%23D4AF37' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2v-2.5h2v-4h-2v-2h2v-4h-2v-2h2v-4h-2V0h2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2.5H20zm0 0h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v2h20v2H20v-20.5zm-2 0H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v2H0v2h18v-20.5z' fill='%23D4AF37' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
   .bg-kawung {
@@ -278,7 +278,7 @@ const StoryboardItem = ({ year, title, description, icon: Icon, delay = 0, isLas
       <h5 className="font-serif text-[#33481F] font-bold text-lg mb-2">{title}</h5>
       {photo && (
         <div className="portrait-stage w-full h-56 mb-3">
-          <img src={photo.src} alt={photo.alt} className="portrait-img" loading="lazy" />
+          <img src={photo.src} alt={photo.alt} className="portrait-img" loading="lazy" decoding="async" />
           <div className="absolute bottom-2 left-0 right-0 text-center z-10">
             <p className="font-sans text-[9px] text-[#D4AF37] tracking-[0.1em] uppercase px-2">{photo.caption}</p>
           </div>
@@ -292,10 +292,12 @@ const StoryboardItem = ({ year, title, description, icon: Icon, delay = 0, isLas
 };
 
 // Kartu galeri foto/video — placeholder bertema, siap diganti foto asli nantinya
+// Video YouTube dimuat sebagai FACADE (thumbnail statis) sampai user klik,
+// supaya iframe berat (~500KB+ JS pihak ketiga) tidak ikut membebani load awal halaman.
 const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) => {
   const [ref, visible] = useReveal(0.15);
+  const [videoActivated, setVideoActivated] = useState(false);
 
-  // Video YouTube langsung bisa diputar di dalam galeri (embed), bukan cuma thumbnail
   if (videoId) {
     return (
       <div
@@ -303,15 +305,41 @@ const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) 
         style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
         className={`reveal-scale ${visible ? 'visible' : ''} rounded-xl overflow-hidden border border-[#D4AF37]/30 shadow-lg bg-[#141C0D]`}
       >
-        <div className="aspect-video w-full">
-          <iframe
-            className="w-full h-full"
-            src={`https://www.youtube.com/embed/${videoId}`}
-            title={label}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+        <div className="aspect-video w-full relative">
+          {videoActivated ? (
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+              title={label}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setVideoActivated(true)}
+              aria-label={`Putar video: ${label}`}
+              className="absolute inset-0 w-full h-full group"
+            >
+              <img
+                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                alt={label}
+                width={480}
+                height={270}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <div className="w-14 h-14 rounded-full bg-[#D4AF37] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#141C0D] translate-x-0.5" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </button>
+          )}
         </div>
         <p className="text-center font-sans text-[10px] text-[#F5EFE6]/80 tracking-wide px-2 py-2.5">{label}</p>
       </div>
@@ -327,7 +355,7 @@ const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) 
       {photo ? (
         <>
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 25%, rgba(212,175,55,0.25) 0%, transparent 70%)' }}></div>
-          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src={photo} alt={label} className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#141C0D] to-transparent"></div>
           <p className="absolute bottom-2 left-0 right-0 text-center font-sans text-[10px] leading-tight text-[#F5EFE6] tracking-wide px-2 z-10">{label}</p>
         </>
@@ -399,6 +427,10 @@ export default function App() {
   // document.createElement secara imperatif untuk jadi target YouTube. Karena
   // div mentah itu tidak pernah ada di JSX, React tidak pernah mencoba
   // mengelola ulang node tersebut, jadi aman walau YouTube menggantinya.
+  //
+  // PERF: skrip YouTube IFrame API (dan pembuatan player) HANYA dimuat setelah
+  // user menekan "Buka Undangan" (loadYT dipanggil dari handleOpenInvitation),
+  // bukan saat halaman pertama kali render — supaya tidak membebani FCP/LCP.
   const YT_VIDEO_ID = 'pSIHGuR_DCw';
   const ytWrapperRef = useRef(null);
   const ytPlayerRef = useRef(null);
@@ -582,8 +614,24 @@ export default function App() {
               className="z-10 relative flex flex-col items-center"
             >
               <div className="flex gap-4 justify-center items-center mb-6">
-                <img src={tuankuTambusaiImg} alt="Kodam XIX/Tuanku Tambusai" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
-                <img src={siakImg} alt="Bupati Siak" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" fetchPriority="high" />
+                <img
+                  src={tuankuTambusaiImg}
+                  alt="Kodam XIX/Tuanku Tambusai"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+                  fetchPriority="high"
+                  decoding="async"
+                />
+                <img
+                  src={siakImg}
+                  alt="Bupati Siak"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
 
               <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#D4AF37] tracking-[0.2em] text-xs font-semibold mb-3 uppercase">
@@ -643,14 +691,14 @@ export default function App() {
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex items-start justify-center gap-6 mb-6 w-full px-4">
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
-                      <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" loading="lazy" />
+                      <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" width={128} height={128} className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" loading="lazy" decoding="async" />
                     </div>
                     <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Pangdam XIX/Tuanku Tambusai</p>
                     <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP</p>
                   </div>
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
-                      <img src={bupatiSiakImg} alt="Bupati Siak" className="w-full h-full object-cover object-top" loading="lazy" />
+                      <img src={bupatiSiakImg} alt="Bupati Siak" width={128} height={128} className="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                     </div>
                     <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Bupati Siak</p>
                     <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Dr. Afni Z, S.A.P., M.Si</p>
@@ -674,7 +722,7 @@ export default function App() {
                 {/* Foto Is K */}
                 <motion.div variants={{ hidden: { opacity: 0, scale: 0.7 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="mb-6">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814] mx-auto">
-                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" loading="lazy" />
+                    <img src={iskImg} alt="Is K Violin" width={112} height={112} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                 </motion.div>
 
@@ -709,10 +757,10 @@ export default function App() {
                 {/* Foto anak Palestina & korban NTT */}
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-3 justify-center mb-2 w-full px-6">
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
-                    <img src={anakPalestinaImg} alt="Anak-anak Palestina" className="w-full h-32 object-cover" loading="lazy" />
+                    <img src={anakPalestinaImg} alt="Anak-anak Palestina" width={140} height={128} className="w-full h-32 object-cover" loading="lazy" decoding="async" />
                   </div>
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
-                    <img src={korbanNttImg} alt="Korban Gempa NTT" className="w-full h-32 object-cover" loading="lazy" />
+                    <img src={korbanNttImg} alt="Korban Gempa NTT" width={140} height={128} className="w-full h-32 object-cover" loading="lazy" decoding="async" />
                   </div>
                 </motion.div>
 
