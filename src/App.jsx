@@ -430,21 +430,28 @@ export default function App() {
       });
     };
 
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-      const previousReady = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
-        if (previousReady) previousReady();
+    const loadYT = () => {
+      if (cancelled) return;
+      if (window.YT && window.YT.Player) {
         initPlayer();
-      };
-    }
+      } else {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.body.appendChild(tag);
+        const previousReady = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => {
+          if (previousReady) previousReady();
+          initPlayer();
+        };
+      }
+    };
+
+    // Defer YouTube loading to massively improve initial page load (LCP & TBT)
+    const timerId = setTimeout(loadYT, 2500);
 
     return () => {
       cancelled = true;
+      clearTimeout(timerId);
     };
   }, []);
 
