@@ -313,7 +313,12 @@ const GalleryTile = ({ icon: Icon, label, isVideo, delay = 0, photo, videoId }) 
             allowFullScreen
           ></iframe>
         </div>
-        <p className="text-center font-sans text-[10px] text-[#F5EFE6]/80 tracking-wide px-2 py-2.5">{label}</p>
+        <div className="text-center px-2 py-2.5">
+          <p className="font-sans text-[10px] text-[#F5EFE6]/80 tracking-wide mb-1">{label}</p>
+          <p className="font-sans text-[9px] text-[#D4AF37] tracking-[0.1em] uppercase font-bold">
+            Jangan lupa Like, Comment & Subscribe!
+          </p>
+        </div>
       </div>
     );
   }
@@ -639,21 +644,21 @@ export default function App() {
                 }}
                 className="relative z-10 flex flex-col items-center w-full"
               >
-                {/* Foto Pangdam & Bupati Siak berdampingan */}
-                <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex items-start justify-center gap-6 mb-6 w-full px-4">
-                  <div className="flex flex-col items-center flex-1">
-                    <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
+                {/* Foto Pangdam & Bupati Siak bersusun */}
+                <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex flex-col items-center justify-center gap-6 mb-6 w-full px-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
                       <img src={pangdamImg} alt="Pangdam XIX/Tuanku Tambusai" className="w-full h-full object-cover object-top scale-[1.3] -translate-y-3" loading="lazy" />
                     </div>
-                    <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Pangdam XIX/Tuanku Tambusai</p>
-                    <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP</p>
+                    <p className="font-sans text-[10px] text-[#D4AF37]/80 tracking-wide uppercase mt-3 text-center leading-tight max-w-[200px]">Pangdam XIX/Tuanku Tambusai</p>
+                    <p className="font-sans text-[10px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[200px]">Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP</p>
                   </div>
-                  <div className="flex flex-col items-center flex-1">
-                    <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
+                  <div className="flex flex-col items-center">
+                    <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814]">
                       <img src={bupatiSiakImg} alt="Bupati Siak" className="w-full h-full object-cover object-top" loading="lazy" />
                     </div>
-                    <p className="font-sans text-[8px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[130px]">Bupati Siak</p>
-                    <p className="font-sans text-[8px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[130px]">Dr. Afni Z, S.A.P., M.Si</p>
+                    <p className="font-sans text-[9px] text-[#D4AF37]/80 tracking-wide uppercase mt-2 text-center leading-tight max-w-[200px]">Bupati Siak</p>
+                    <p className="font-sans text-[9px] text-[#D4AF37]/60 tracking-wide text-center leading-tight max-w-[200px]">Dr. Afni Z, S.A.P., M.Si</p>
                   </div>
                 </motion.div>
 
@@ -672,11 +677,7 @@ export default function App() {
                 </motion.p>
 
                 {/* Foto Is K */}
-                <motion.div variants={{ hidden: { opacity: 0, scale: 0.7 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="mb-6">
-                  <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814] mx-auto">
-                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" loading="lazy" />
-                  </div>
-                </motion.div>
+                
 
                 {/* Rangka acara: Dirgahayu RI & HUT Kodam */}
                 <motion.div variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="merah-putih-rule w-14 rounded-full mb-3"></motion.div>
@@ -693,6 +694,11 @@ export default function App() {
                 {/* Judul konser */}
                 <motion.h1 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-5xl mb-1 text-[#FDE047] drop-shadow-lg">Konser Amal</motion.h1>
                 <motion.h2 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-2xl font-bold tracking-widest mb-2 text-white uppercase">Is K Violin</motion.h2>
+                <motion.div variants={{ hidden: { opacity: 0, scale: 0.7 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="mb-6">
+                  <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-[#1C2814] mx-auto">
+                    <img src={iskImg} alt="Is K Violin" className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                </motion.div>
                 <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans italic text-[#D4AF37] text-xs tracking-[0.15em] uppercase mb-4">
                   Dari Anak Untuk Anak
                 </motion.p>
@@ -753,7 +759,7 @@ export default function App() {
                   icon={Music2}
                   isLast={true}
                   delay={240}
-                  description={`Di salah satu hotel di Pekanbaru,  terjadi pertemuan antara CEO Sun Event Organizer "Muhammad (Is K Management), iRawan Adi Syahputra" Tokoh Muda Dari Rengat. Tak disangka, beliau yang berjiwa seni sangat setuju Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini dilaksanakan sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/Tuanku Tambusai — namun beliau meminta waktu beberapa hari untuk berkonsultasi dengan Bapak Pangdam. Alhamdulillah, penantian itu berbuah manis: jiwa kemanusiaan yang tumbuh subur pada diri Pangdam Tuanku Tambusai, Bapak Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP, mengaminkan Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini. Beliau menyatakan konser tersebut ditaja langsung oleh Kodam XIX/TT — mengingat beliau sebelumnya pernah mengadakan konser amal di tahun 2025 — dan beliau setuju konser ini ditalentai oleh violinist cilik dari Kabupaten Siak, 'Is K'`}
+                  description={`Di salah satu hotel di Pekanbaru,  terjadi pertemuan antara CEO Sun Event Organizer "Muhammad (Is K Management), Irawan Adi Syahputra" Tokoh Muda Dari Rengat dengan KASDAM XIX/TT "Bapak Brigjen TNI Rudi Hermawan,S.E., M.M. tak disangka, beliau yang berjiwa seni sangat setuju Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini dilaksanakan sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/Tuanku Tambusai — namun beliau meminta waktu beberapa hari untuk berkonsultasi dengan Bapak Pangdam. Alhamdulillah, penantian itu berbuah manis: jiwa kemanusiaan yang tumbuh subur pada diri Pangdam Tuanku Tambusai, Bapak Mayjen TNI Dr. Agus Hadi Waluyo, S.A.P., M.M., CHRMP, mengaminkan Konser Amal untuk anak-anak Palestina dan bantuan korban bencana NTT ini. Beliau menyatakan konser tersebut ditaja langsung oleh Kodam XIX/TT — mengingat beliau sebelumnya pernah mengadakan konser amal di tahun 2025 — dan beliau setuju konser ini ditalentai oleh violinist cilik dari Kabupaten Siak, 'Is K'`}
                 />
               </div>
               <ShapeDivider topColor="#FDFBF7" bottomColor="#33481F" isFlipped={true} />
