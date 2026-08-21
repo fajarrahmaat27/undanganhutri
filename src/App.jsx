@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MailOpen, Quote, Clock, Music2, HeartHandshake } from 'lucide-react';
+import { MailOpen, Quote, Clock, Music2, HeartHandshake, Share2, Copy, Check, Send, ExternalLink, Calendar, MapPin } from 'lucide-react';
 import heroImg from './assets/hero.png';
 import iskImg from './assets/isk.png';
 import pangdamImg from './assets/pangdam.png';
@@ -381,11 +381,76 @@ const CountdownBox = ({ value, label }) => (
 export default function App() {
   const [isOpened, setIsOpened] = useState(false);
   const [confetti, setConfetti] = useState([]);
+  const [guestName, setGuestName] = useState('');
+  const [customGuest, setCustomGuest] = useState('');
+  const [copied, setCopied] = useState(false);
   const idCounter = useRef(0);
   const CARD_WIDTH = 448;
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const toParam = urlParams.get('to') || urlParams.get('nama') || urlParams.get('u');
+      if (toParam) {
+        setGuestName(toParam);
+      }
+    }
+  }, []);
+
   const handleOpenInvitation = () => {
     setIsOpened(true);
+  };
+
+  const currentGuestName = guestName || customGuest;
+  
+  const generateShareUrl = (name) => {
+    if (typeof window === 'undefined') return 'https://seikat.my.id';
+    const baseUrl = window.location.origin + window.location.pathname;
+    if (name && name.trim()) {
+      return `${baseUrl}?to=${encodeURIComponent(name.trim())}`;
+    }
+    return baseUrl;
+  };
+
+  const getShareMessage = (name) => {
+    const targetName = name && name.trim() ? name.trim() : 'Bapak/Ibu/Saudara/i';
+    const link = generateShareUrl(name);
+    return `Kepada Yth. *${targetName}*,
+
+*UNDANGAN RESMI & KONSER AMAL*
+*KODAM XIX/TUANKU TAMBUSAI & BUPATI SIAK*
+_Present: Is K Violin ("Dari Anak Untuk Anak")_
+
+Dalam rangka:
+🇮🇩 *Sempena Dirgahayu RI ke-81 & HUT ke-1 Kodam XIX/TT*
+
+Bantuan Kemanusiaan untuk Anak-anak Palestina & Korban Bencana Gempa NTT.
+
+🗓 *Sabtu, 29 Agustus 2026*
+⏰ *Pukul 18.00 WIB s/d Selesai*
+📍 *Lapangan Utama Makodam XIX/Tuanku Tambusai*
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dalam acara ini.
+
+Buka Undangan Digital Resmi melalui tautan berikut:
+🔗 ${link}
+
+_Terima Kasih._`;
+  };
+
+  const handleShareWhatsApp = (name) => {
+    const message = getShareMessage(name);
+    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
+  };
+
+  const handleCopyLink = (name) => {
+    const message = getShareMessage(name);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(message);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
   };
 
 
@@ -538,7 +603,18 @@ export default function App() {
                 Sempena HUT RI ke-81 & HUT ke-1 Kodam XIX/TT
               </motion.p>
 
-              <motion.div variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } } }} className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent my-10"></motion.div>
+              {/* Kepada Yth Penerima Undangan (Personalisasi Link) */}
+              <motion.div 
+                variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}
+                className="mt-3 mb-6 px-4 py-2.5 rounded-xl bg-black/30 border border-[#D4AF37]/40 backdrop-blur-sm max-w-[280px] w-full"
+              >
+                <p className="font-sans text-[10px] text-[#D4AF37] uppercase tracking-[0.15em] font-semibold">
+                  Kepada Yth. Bapak/Ibu/Saudara/i:
+                </p>
+                <p className="font-serif text-base font-bold text-white tracking-wide mt-0.5 truncate">
+                  {guestName || "Tamu Undangan"}
+                </p>
+              </motion.div>
 
               <motion.button
                 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
@@ -732,7 +808,7 @@ export default function App() {
             </section>
 
             {/* Section 3B: Donasi */}
-            <section className="relative bg-gradient-to-b from-[#0f150a] to-[#1C2814] pt-14 pb-24 px-6">
+            <section className="relative bg-gradient-to-b from-[#0f150a] to-[#1C2814] pt-14 pb-20 px-6">
               <div className="absolute inset-0 bg-batik-gold opacity-30"></div>
 
               <div ref={donasiRef} className={`reveal ${donasiVisible ? 'visible' : ''} relative z-10 text-center`}>
@@ -756,7 +832,78 @@ export default function App() {
                   Terima kasih, donasi Anda sangat menentukan nasib saudara kita.
                 </p>
               </div>
-              <ShapeDivider topColor="#1C2814" bottomColor="#24331a" />
+              <ShapeDivider topColor="#1C2814" bottomColor="#172212" />
+            </section>
+
+            {/* Section 5: Bagikan Undangan ke WhatsApp */}
+            <section className="relative bg-gradient-to-b from-[#172212] to-[#24331a] pt-14 pb-20 px-6 text-center">
+              <div className="absolute inset-0 bg-batik opacity-30"></div>
+
+              <div className="relative z-10 max-w-xs mx-auto">
+                <div className="w-12 h-12 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center mx-auto mb-4">
+                  <Share2 className="w-6 h-6 text-[#25D366]" />
+                </div>
+                
+                <h4 className="font-serif text-2xl font-bold text-[#D4AF37] tracking-wider uppercase mb-2">
+                  Bagikan Undangan
+                </h4>
+                <p className="font-sans text-xs text-gray-300 leading-relaxed mb-6">
+                  Kirimkan undangan resmi ini kepada rekan, keluarga, atau tamu kehormatan melalui WhatsApp.
+                </p>
+
+                {/* Card Form Personalisasi Nama Tamu */}
+                <div className="bg-[#141C0D]/90 border border-[#D4AF37]/40 rounded-2xl p-5 text-left shadow-xl backdrop-blur-md">
+                  <label className="block font-sans text-[11px] font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
+                    Nama Penerima / Tamu (Opsional):
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Bapak H. Ahmad / Rekan Alumni"
+                    value={customGuest}
+                    onChange={(e) => setCustomGuest(e.target.value)}
+                    className="w-full bg-[#22301A] border border-[#D4AF37]/50 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all"
+                  />
+                  
+                  {/* Action Buttons */}
+                  <div className="flex flex-col gap-3 mt-5">
+                    <button
+                      onClick={() => handleShareWhatsApp(currentGuestName)}
+                      className="w-full bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-[#141C0D] font-sans font-bold text-xs uppercase tracking-wider py-3.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2.5 transition-all"
+                    >
+                      <Send className="w-4 h-4 text-[#141C0D]" />
+                      Kirim via WhatsApp
+                    </button>
+
+                    <button
+                      onClick={() => handleCopyLink(currentGuestName)}
+                      className="w-full bg-[#1C2814] hover:bg-[#28381c] active:scale-[0.98] border border-[#D4AF37]/60 text-[#D4AF37] font-sans font-semibold text-xs uppercase tracking-wider py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 text-[#25D366]" />
+                          <span className="text-[#25D366]">Teks &amp; Link Tersalin!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 text-[#D4AF37]" />
+                          Salin Pesan Undangan
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Preview Mini Box */}
+                <div className="mt-4 p-3 rounded-lg bg-black/40 border border-[#D4AF37]/20 text-left">
+                  <p className="font-sans text-[9px] text-[#D4AF37] uppercase font-bold tracking-wider mb-1">
+                    Preview Link WhatsApp:
+                  </p>
+                  <p className="font-mono text-[10px] text-gray-300 truncate">
+                    {generateShareUrl(currentGuestName)}
+                  </p>
+                </div>
+              </div>
+              <ShapeDivider topColor="#24331a" bottomColor="#24331a" />
             </section>
 
             {/* Footer */}
