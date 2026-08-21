@@ -464,7 +464,7 @@ export default function App() {
     { photo: bupatiSiakImg, label: 'Dr. Afni Z, S.A.P., M.Si' },
     { photo: iskImg, label: 'Is K Violin' },
     { photo: anakPalestinaGaleriImg, label: 'Anak-anak Palestina' },
-    { photo: korbanNttGaleriImg, label: 'Korban Bencana Nasional' },
+    { photo: korbanNttGaleriImg, label: 'Korban Gempa NTT' },
     { photo: trankGaleriImg, label: 'Solidaritas Kemanusiaan' },
     { videoId: 'VwJ2o73QeYU', label: 'Video Teaser' },
   ];
@@ -531,7 +531,7 @@ export default function App() {
               <h1 className="font-script text-white text-5xl mb-2 drop-shadow-md">Konser Amal</h1>
               
               <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#D4AF37] text-lg font-bold tracking-widest uppercase mt-2">
-                Anak-Anak Palestine & Korban Bencana Nasional
+                Anak-Anak Palestine & Korban Bencana Gempa NTT
               </motion.p>
 
               <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#F5EFE6]/70 text-[9px] tracking-[0.15em] uppercase mt-3 max-w-[240px] leading-relaxed">
@@ -594,10 +594,13 @@ export default function App() {
                 <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#FDE047] text-lg font-bold tracking-wider uppercase text-center px-4">
                   Forkopimda Kab. Siak
                 </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#FDE047] text-lg font-bold tracking-wider uppercase text-center px-4">
+                  Siswa Siswi Kab. Siak
+                </motion.p>
                 <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-script text-2xl text-[#D4AF37] my-0.5">
                   &amp;
                 </motion.p>
-                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-[#F5EFE6]/90 text-[11px] tracking-wide uppercase text-center max-w-[260px] leading-relaxed mb-6">
+                <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-serif text-[#FDE047] text-lg font-bold tracking-wider uppercase text-center px-4 mb-6 leading-snug">
                   Seluruh Elemen Masyarakat Siak - Riau - Indonesia
                 </motion.p>
 
@@ -634,16 +637,16 @@ export default function App() {
                   Bantuan Kemanusiaan
                 </motion.p>
                 <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="font-sans text-sm text-[#F5EFE6] leading-relaxed text-center max-w-[280px] mb-6">
-                  untuk Anak Palestina &amp; Korban Bencana Nasional
+                  untuk Anak Palestina &amp; Korban Gempa NTT
                 </motion.p>
 
-                {/* Foto anak Palestina & korban Bencana Nasional */}
+                {/* Foto anak Palestina & korban NTT */}
                 <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }} className="flex gap-3 justify-center mb-2 w-full px-6">
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
                     <img src={anakPalestinaImg} alt="Anak-anak Palestina" className="w-full h-32 object-cover" loading="lazy" />
                   </div>
                   <div className="flex-1 max-w-[140px] rounded-xl overflow-hidden border border-[#D4AF37]/40 shadow-md">
-                    <img src={korbanNttImg} alt="Korban Bencana Nasional" className="w-full h-32 object-cover" loading="lazy" />
+                    <img src={korbanNttImg} alt="Korban Gempa NTT" className="w-full h-32 object-cover" loading="lazy" />
                   </div>
                 </motion.div>
 
@@ -662,7 +665,7 @@ export default function App() {
                   <div className="bg-white/10 backdrop-blur-sm p-4 border-x border-b border-[#D4AF37]/30">
                     <p className="font-sans text-sm font-bold text-white">
                       Sabtu, 29 Agustus 2026<br />
-                      <span className="text-[#F5EFE6]/80 font-normal">Lapangan Utama Makodam XIX/Tuanku Tambusai</span>
+                      <span className="text-[#F5EFE6]/80 font-normal">Lapangan Siak Bermadah</span>
                     </p>
                   </div>
                 </motion.div>
@@ -731,6 +734,7 @@ export default function App() {
               </div>
             </section>
 
+            {/* Section 3B: Donasi */}
             <section className="relative bg-gradient-to-b from-[#0f150a] to-[#1C2814] pt-14 pb-24 px-6">
               <div className="absolute inset-0 bg-batik-gold opacity-30"></div>
 
@@ -771,7 +775,7 @@ export default function App() {
                 <p className="font-sans text-[10px] text-gray-300 tracking-[0.2em] uppercase mb-8">29 Agustus 2026</p>
 
                 <p className="font-sans text-xs text-gray-300 leading-relaxed max-w-[280px] mx-auto mb-6">
-                  Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan turut mendukung Konser Amal untuk anak-anak Palestina dan korban bencana nasional ini.
+                  Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan turut mendukung Konser Amal untuk anak-anak Palestina dan korban gempa NTT ini.
                 </p>
                 <p className="font-sans text-sm font-bold text-white mb-10">Terima Kasih.</p>
 
